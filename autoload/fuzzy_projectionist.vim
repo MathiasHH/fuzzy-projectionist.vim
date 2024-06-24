@@ -112,7 +112,9 @@ func! s:sink(lines, d_workdir, d_glob, ...) abort
   if len(a:lines) < 2 | return | endif
   let query = a:lines[0]
   let cmd = get({'ctrl-x': 'split',
+        \ 'ctrl-s': 'split',
         \ 'ctrl-v': 'vertical split',
+        \ 'ctrl-i': 'vertical split',
         \ 'ctrl-t': 'tabe'}, a:lines[1], d_cmd)
   if len(a:lines) < 3
     " user matched nothing
@@ -180,7 +182,7 @@ func! fuzzy_projectionist#open_projection(type, patterns, ...)
         \'source': cmd,
         \'sink*': { lines -> s:sink(lines, a:patterns[0][0], a:patterns[0][1]) },
         \'options': extra_opts + [
-        \ '--expect=ctrl-t,ctrl-v,ctrl-x',
+        \ '--expect=ctrl-t,ctrl-v,ctrl-x,ctrl-i,ctrl-s',
         \ '--with-nth=5',
         \ '-d:',
         \ '--print-query',
